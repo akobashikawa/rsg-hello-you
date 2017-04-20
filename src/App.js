@@ -9,6 +9,17 @@ require('bootstrap');
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: ''
+    };
+  }
+
+  helloBtnHandler() {
+    this.setState({name: this.nameInput.value});
+  }
 
   render() {
     return (
@@ -24,13 +35,17 @@ class App extends Component {
         <div className="main">
           <div className="container">
             <div className="input-group col-xs-4 col-xs-offset-4">
-              <input className="form-control" type="text" placeholder="Your Name"/>
+              <input className="form-control" type="text" placeholder="Your Name"
+                ref={input => this.nameInput = input}
+              />
               <div className="input-group-btn">
-                <button className="btn">Hello</button>
+                <button className="btn" onClick={() => this.helloBtnHandler()}>Hello</button>
               </div>
             </div>
             <div>
-              <h1>Hello You!</h1>
+              {this.state.name && (
+                <h1>Hello {this.state.name}!</h1>
+              )}
             </div>
           </div>
         </div>
